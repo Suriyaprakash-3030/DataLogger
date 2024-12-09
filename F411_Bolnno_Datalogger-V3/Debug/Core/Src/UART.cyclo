@@ -1,0 +1,2 @@
+../Core/Src/UART.c:17:7:MX_USART1_UART_Init	2
+../Core/Src/UART.c:47:7:UART_Printf	1

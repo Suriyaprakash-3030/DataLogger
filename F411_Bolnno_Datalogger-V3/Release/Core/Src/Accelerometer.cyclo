@@ -1,0 +1,3 @@
+../Core/Src/Accelerometer.c:33:6:Acc_Init	1
+../Core/Src/Accelerometer.c:46:19:Get_Axis	3
+../Core/Src/Accelerometer.c:99:9:System_Start	12

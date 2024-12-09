@@ -1,0 +1,2 @@
+../Core/Src/ISR.c:54:6:Sleep_mode	8	static
+../Core/Src/ISR.c:36:6:HAL_TIM_PeriodElapsedCallback	8	static
