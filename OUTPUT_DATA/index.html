@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphical presentation GERMAN format</title>
+<style>
+body {
+margin: 0;
+padding: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100vh;
+}
+#outer_box {
+top: 80%;
+width: 98%;
+height: 70vh;
+overflow: auto;
+border: 2px solid #000;
+position: absolute;
+}
+#outer_box1 {
+top: 2%;
+width: 98%;
+height: 70vh;
+overflow: auto;
+border: 2px solid #000;
+position: absolute;
+}
+#outer_box2 {
+top: 157%;
+width: 98%;
+height: 70vh;
+overflow: auto;
+border: 2px solid #000;
+position: absolute;
+}
+#outer_box3 {
+top: 234%;
+width: 98%;
+height: 70vh;
+overflow: auto;
+border: 2px solid #000;
+position: absolute;
+}
+#outer_box4 {
+top: 310%;
+width: 98%;
+height: 70vh;
+overflow: auto;
+border: 2px solid #000;
+position: absolute;
+}
+#outer_box5 {
+top: 385%;
+width: 98%;
+height: 70vh;
+overflow: auto;
+border: 2px solid #000;
+position: absolute;
+}
+#outer_box6 {
+top: 460%;
+width: 98%;
+height: 70vh;
+overflow: auto;
+border: 2px solid #000;
+position: absolute;
+ }
+#outer_box7 {
+top: 535%;
+width: 98%;
+height: 70vh;
+overflow: auto;
+border: 2px solid #000;
+position: absolute;
+}
+#outer_box8 {
+top: 700%;
+width: 98%;
+height: 70vh;
+overflow: auto;
+border: 2px solid #000;
+position: absolute;
+}
+#outer_box9 {
+top: 800%;
+width: 98%;
+height: 70vh;
+overflow: auto;
+border: 2px solid #000;
+position: absolute;
+}
+#tableContainer {
+max-height: 600px;
+overflow-y: auto;
+}
+table {
+border-collapse: collapse;
+width: 100%;
+table-layout: fixed;
+margin-bottom: 20px;
+}
+th, td {
+border: 1px solid #dddddd;
+text-align: left;
+padding: 8px;
+}
+th{
+background-color: #f2f2f2;
+}
+#curve_chart {
+top: 70%;
+width: 98%;
+height: 70vh;
+overflow: auto;
+}
+#curve_chart2 {
+top: 70%;
+width: 98%;
+height: 70vh;
+}
+#curve_chart3 {
+top: 70%;
+width: 98%;
+height: 70vh;
+}
+#curve_chart4 {
+top: 70%;
+width: 98%;
+height: 70vh;
+}
+#curve_chart5 {
+top: 70%;
+width: 98%;
+height: 70vh;
+}
+#curve_chart6 {
+top: 70%;
+width: 98%;
+height: 70vh;
+}
+#fileInputContainer {
+position: absolute;
+top: 10px;
+left: 10px;
+background-color: #fff;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#container {
+perspective: 800px;
+width: 300px;
+height: 300px;
+position: absolute;
+top: 30%;
+left: 40%;
+}
+#refresh-button {
+      padding: 5px 8px;
+      color: #fff;
+     border: 1px solid #ccc;
+background-color: #3498db;   
+      font-size: 13px;
+      border-radius: 5px;
+    }
+#model {
+width: 100%;
+height: 100%;
+background-color: #3498db;
+position: absolute;
+transform-style: preserve-3d;
+transition: transform 1s ease-in-out;
+}
+.axis {
+position: absolute;
+width: 2px;
+height: 100px;
+background-color: #e74c3c;
+transform-origin: 50% 100%;
+}
+.axis-x {
+left: 50%;
+top: 50%;
+transform: translateX(-50%) translateY(-100%) rotateX(90deg);
+background-color: #25161a;
+}
+.axis-y {
+left: 50%;
+top: 50%;
+transform: translateX(-50%) translateY(-50%)rotateZ(-90deg);
+background-color: #e74c3c;
+}
+.axis-z {
+left: 50%;
+top: 50%;
+transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
+background-color: #68f4c6;
+}
+#play-button {
+position: absolute;
+top: 100px;
+left:20%;
+transform: translateX(-50%);
+padding: 10px;
+background-color: #2ecc71;
+color: #fff;
+cursor: pointer;
+}
+#play-button1 {
+position: absolute;
+top: 100px;
+left: 40%;
+transform: translateX(-50%);
+padding: 10px;
+background-color: #2ecc71;
+color: #fff;
+cursor: pointer;
+}
+#pause-button {
+position: absolute;
+top: 100px;
+left: 60%;
+transform: translateX(-50%);
+padding: 10px;
+background-color: #e74c3c;
+color: #fff;
+cursor: pointer;
+}
+#reset-button {
+position: absolute;
+top: 100px;
+left: 80%;
+transform: translateX(-50%);
+padding: 10px;
+background-color: #3498db;
+color: #fff;
+cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div id="outer_box1">
+<div id="fileInputContainer">
+  <button id="refresh-button" onclick="refreshPage()">Refresh</button>
+<input type="file" id="fileInput" accept=".csv">
+<div id="tableContainer">
+</div>
+</div>
+</div>
+<div id="outer_box">
+<div id="curve_chart"></div>
+</div>
+<div id="outer_box2">
+<div id="container">
+<div id="model">
+<div class="axis axis-x"></div>
+<div class="axis axis-y"></div>
+<div class="axis axis-z"></div>
+</div>
+</div>
+<p align="center"><b>Time:</b> <span style="font-weight:bold;" id="clickCount">0</span></p>
+<p style="bottom: 0; width: 100%; text-align: center;">
+<span style="color: #25161a;">(X-AXIS)</span>
+<span style="color: #e74c3c;">(Y-AXIS)</span>
+<span style="color: #68f4c6;">(Z-AXIS)</span>
+</p>
+<div id="play-button" onclick="playAnimation()">CLICK</div>
+<div id="play-button1" onclick="autoPlayAnimation()">AUTO_PLAY</div>
+<div id="pause-button" onclick="pauseAnimation()">PAUSE</div>
+<div id="reset-button" onclick="resetAnimation()">RESET</div>
+</div>
+<div id="outer_box3">
+<div id="curve_chart2"></div>
+</div>
+<div id="outer_box4">
+<div id="curve_chart3"></div>
+</div>
+<div id="outer_box5">
+<div id="curve_chart4"></div>
+</div>
+<div id="outer_box6">
+<div id="curve_chart5"></div>
+</div>
+<div id="outer_box7">
+<div id="curve_chart6"></div>
+</div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(handleFile);
+document.getElementById('fileInput').addEventListener('change', handleFile);
+const firstColumnValues = [];
+const userValues = [];
+const axis = [];
+const temp = [];
+const freq = [];
+const sleep = [];
+const Rwater = [];
+const pressure = [];
+let d1 = [];
+let d2 = [];
+let d3 = [];
+let d4 = [];
+let d5=[];
+let d6=[];
+let d7=[];
+let d8=[];
+let d9=[];
+let d10=[];
+let d11=[];
+let d12=[];
+let data = [];
+let d =[];
+let t = [];
+let f =[];
+let s=[];
+let rw=[];
+let pre=[];
+let lines = []; 
+let currentTimeIndex = 0;
+function handleFile(event) {
+const file = event.target.files[0];
+if (file) {
+const reader = new FileReader();
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(handleFile);
+reader.onload = function(e) {
+const csvData = e.target.result;
+userValues.length=0;
+const tableHtml = generateTableFromCSV(csvData);
+document.getElementById('tableContainer').innerHTML = tableHtml;
+axis.length=0;
+temp.length=0;
+freq.length=0;
+sleep.length=0;
+Rwater.length = 0;
+pressure.length = 0;
+d1.length=0;
+d2.length=0;
+d3 .length=0;
+d4 .length=0;
+d5.length=0;
+d6.length=0;
+d7.length=0;
+d8.length=0;
+d9.length=0;
+d10.length=0;
+d11.length=0;
+d12.length=0;
+d .length=0;
+t.length=0;
+f .length=0;
+s.length=0;
+rw.length = 0;
+pre.length=0;
+axis.push(userValues.map(row => row.slice(0, 4).map(value => value.toString().replace(',', '.'))));
+console.log("User Values Array:",axis);
+for (let i = 0; i < userValues.length-1; i++) {
+d1.push(axis[0][i][0]);
+d2.push(axis[0][i][1]);
+d3.push(axis[0][i][2]);
+d4.push(axis[0][i][3]);
+}
+for (let i = 0; i < userValues.length-1; i++) {
+if (i === 0) {
+d.push([d1[i], d2[i], d3[i], d4[i]]);
+} else {
+d.push([Number(d1[i]), Number(d2[i]), Number(d3[i]), Number(d4[i])]);
+}
+}
+ var data = google.visualization.arrayToDataTable(d);
+ console.log("data is is",data);
+var options = {
+title: 'Accelerometer Data',
+curveType: 'function',
+legend: { position: 'bottom' },
+hAxis: { title: 'Time' },
+vAxis: { title: 'Acceleration' },
+explorer: { actions: ['dragToZoom', 'rightClickToReset', 'scrollToZoom'] },
+pointSize: 5,
+pointShape: { type: 'circle', sides: 4, dent: 0.2, rotation: 45 },
+chartArea: {
+backgroundColor: '#f0f0f0' 
+}
+};
+var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+chart.draw(data, options);
+temp.push(userValues.map(row => {
+console.log('Row:', row);
+return [
+row[0]?.toString()?.replace(',', '.') || '',
+row[4]?.toString()?.replace(',', '.') || '',
+row[5]?.toString()?.replace(',', '.') || '',
+row[6]?.toString()?.replace(',', '.') || '',
+row[7]?.toString()?.replace(',', '.') || ''
+];
+}));
+console.log("User Values temp:",temp);
+for (let i = 0; i < userValues.length-1; i++) {
+d1.push(temp[0][i][0]);
+d5.push(temp[0][i][1]);
+d6.push(temp[0][i][2]);
+d7.push(temp[0][i][3]);
+d8.push(temp[0][i][4]);
+}
+for (let i = 0; i < userValues.length-1; i++) {
+if(i === 0) {
+t.push([d1[i], d5[i], d6[i], d7[i], d8[i]]);
+} else {
+t.push([Number(d1[i]), Number(d5[i]), Number(d6[i]), Number(d7[i]), Number(d8[i])]);
+}
+}
+console.log("temp test data",t);
+var tdata = google.visualization.arrayToDataTable(t);
+var options = {
+title: 'Temperature Data',
+curveType: 'function',
+legend: { position: 'bottom' },
+hAxis: { title: 'Time' },
+vAxis: { title: 'Temperature', gridlines: { count: 1 }  },
+pointSize: 5,
+pointShape: { type: 'circle', sides: 4, dent: 0.2, rotation: 45 },
+explorer: { actions: ['dragToZoom', 'rightClickToReset', 'scrollToZoom'] },
+};
+var chart1 = new google.visualization.LineChart(document.getElementById('curve_chart2'));
+chart1.draw(tdata, options);
+freq.push(userValues.map(row => [
+row[0].toString().replace(',', '.'),
+row[8]?.toString()?.replace(',', '.') || ''
+]));
+ for (let i = 0; i < userValues.length; i++) {
+d1.push(freq[0][i][0]);
+d9.push(freq[0][i][1]);
+}
+for (let i = 0; i < userValues.length; i++) {
+if (i === 0) {
+f.push([d1[i], d9[i]]);
+} else {
+f.push([Number(d1[i]),Number(d9[i])]);
+}
+}
+ var fdata = google.visualization.arrayToDataTable(f);
+ var options = {
+title: 'Amplitude Data',
+curveType: 'function',
+legend: { position: 'bottom' },
+hAxis: { title: 'Time' },
+vAxis: { title: 'Amplitude' },
+explorer: { actions: ['dragToZoom', 'rightClickToReset', 'scrollToZoom'] },
+pointSize: 5,
+pointShape: { type: 'circle', sides: 4, dent: 0.2, rotation: 45 }
+};
+var chart2 = new google.visualization.LineChart(document.getElementById('curve_chart3'));
+chart2.draw(fdata, options);
+Rwater.push(userValues.map(row => [
+row[0].toString().replace(',', '.'),
+row[9]?.toString()?.replace(',', '.') || ''
+]));
+ for (let i = 0; i < userValues.length; i++) {
+d1.push(Rwater[0][i][0]);
+d10.push(Rwater[0][i][1]);
+}
+for (let i = 0; i < userValues.length; i++) {
+if (i === 0) {
+rw.push([d1[i], d10[i]]);
+ } else {
+rw.push([Number(d1[i]),Number(d10[i])]);
+}
+}
+var rwdata = google.visualization.arrayToDataTable(rw);
+var options = {
+title: 'rwater Data',
+curveType: 'function',
+legend: { position: 'bottom' },
+hAxis: { title: 'Time' },
+vAxis: { title: 'rwater' },
+explorer: { actions: ['dragToZoom', 'rightClickToReset', 'scrollToZoom'] },
+pointSize: 5,
+pointShape: { type: 'circle', sides: 4, dent: 0.2, rotation: 45 }
+ };
+var chart3 = new google.visualization.LineChart(document.getElementById('curve_chart4'));
+chart3.draw(rwdata, options);
+pressure.push(userValues.map(row => [
+row[0].toString().replace(',', '.'),
+row[10]?.toString()?.replace(',', '.') || ''
+]));
+for (let i = 0; i < userValues.length; i++) {
+d1.push(pressure[0][i][0]);
+d11.push(pressure[0][i][1]);
+}
+for (let i = 0; i < userValues.length; i++) {
+if (i === 0) {
+pre.push([d1[i], d11[i]]);
+} else {
+pre.push([Number(d1[i]),Number(d11[i])]);
+}
+}
+var predata = google.visualization.arrayToDataTable(pre);
+var options = {
+title: 'Pressure Data',
+curveType: 'function',
+legend: { position: 'bottom' },
+hAxis: { title: 'Time' },
+vAxis: { title: 'Pressure' },
+explorer: { actions: ['dragToZoom', 'rightClickToReset', 'scrollToZoom'] },
+pointSize: 5,
+pointShape: { type: 'circle', sides: 4, dent: 0.2, rotation: 45 }
+};
+var chart4 = new google.visualization.LineChart(document.getElementById('curve_chart5'));
+chart4.draw(predata, options);
+sleep.push(userValues.map(row => [
+row[0].toString().replace(',', '.'),
+row[11]?.toString()?.replace(',', '.') || ''
+]));
+for (let i = 0; i < userValues.length; i++) {
+d1.push(sleep[0][i][0]);
+d12.push(sleep[0][i][1]);
+}
+for (let i = 0; i < userValues.length; i++) {
+if (i === 0) {
+s.push([d1[i], d12[i]]);
+} else {
+s.push([Number(d1[i]),Number(d12[i])]);
+}
+}
+var sdata = google.visualization.arrayToDataTable(s);
+var options = {
+title: 'sleep Data',
+curveType: 'function',
+legend: { position: 'bottom' },
+hAxis: { title: 'Time' },
+vAxis: { title: 'Sleep' },
+explorer: { actions: ['dragToZoom', 'rightClickToReset', 'scrollToZoom'] },
+pointSize: 5,
+pointShape: { type: 'circle', sides: 4, dent: 0.2, rotation: 45 }
+};
+var chart5 = new google.visualization.LineChart(document.getElementById('curve_chart6'));
+chart5.draw(sdata, options);
+console.log("slp",sleep);
+console.log("tempArray:",temp);
+console.log("d1:",d1);
+console.log("d2:",d2);
+console.log("d3:",d3);
+console.log("d4:",d4);
+console.log("d5:",d5);
+console.log("d6:",d6);
+console.log("d7:",d7);
+console.log("d8:",d8);
+console.log("d9:",d8);
+console.log("data:",data);
+console.log("d is ",d);
+};
+reader.readAsText(file);
+}
+} 
+const timeData = [Number(d[1])];
+let clickCount = 0;
+const clickCountSpan = document.getElementById('clickCount');
+function playAnimation() {
+currentTimeIndex = (currentTimeIndex + 1) % d.length;
+const [time, xAxis, yAxis, zAxis] = d[currentTimeIndex];
+const transformValue = `rotateX(${xAxis}deg) rotateY(${yAxis}deg) rotateZ(${zAxis}deg)`;
+document.getElementById('model').style.transform = transformValue;
+clickCount += 0.5;
+updateClickCount();
+}
+function autoPlayAnimation() {
+autoPlayIntervalId = setInterval(playAnimation, 1000);
+}
+function pauseAnimation() {
+clearInterval(autoPlayIntervalId);
+}
+function generateTableFromCSV(csvData) {
+ lines = csvData.split('\n');
+const tableRows = lines.map((line, index) => {
+const columns = line.split(';');
+userValues.push(columns);
+if (columns.length > 0) {
+            firstColumnValues.push(columns[0]);
+        }
+const rowTag = index === 0 ? 'th' : 'td';
+return `<tr>${columns.map(column => `<${rowTag}>${column}</${rowTag}>`).join('')}</tr>`;
+});
+console.log(`Total rows: ${lines.length}`);
+    console.log(`First column last value: ${firstColumnValues[firstColumnValues.length - 1]}`);
+return `<table>${tableRows.join('')}</table>`;
+resetAnimation();
+}
+function resetAnimation() {
+clearInterval(autoPlayIntervalId);
+currentTimeIndex = 0;
+clickCount = 0;
+updateClickCount();
+const model = document.getElementById('model');
+model.style.transform = `rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+drawChart();
+drawChart2();
+drawChart3();
+drawChart4();
+drawChart5();
+drawChart6();
+clickCountSpan.textContent = clickCount;
+}
+function updateClickCount() {
+clickCountSpan.textContent = clickCount;
+if (clickCount >= (lines.length-3)/2) {
+                clickCount = 0;
+            }
+}
+function refreshPage() {
+      location.reload();
+    }
+</script>
+</body>
+</html>
