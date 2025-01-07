@@ -21,7 +21,10 @@ float Divider_Resistor = 10000;
 float T0 = 298.15;
 float T1_Bvalue = 3435;
 float T2_Bvalue = 3590;
-
+// Steinhart-Hart coefficients for NTC 10k 3590
+#define A 0.001129148
+#define B 0.000234125
+#define C 0.0000000876741
 
 
 
@@ -90,13 +93,23 @@ int* NTC_Array(int Tot_Sensor)
 
     		    			  /*************************NTC CALCULATION*********************************/
 
-    		    			  float voltage = (NTC_ADC_Buffer[i] * Volt_Ref) / ADC_Res;
+//    		    			  float voltage = (NTC_ADC_Buffer[i] * Volt_Ref) / ADC_Res;
+//
+//    		    			  float Res = Divider_Resistor * ( voltage  / (Volt_Ref - voltage));
+//
+//    		    			  float logR = log(Res);
+//
+//    		    			  float Kelvin = 1.0/ (A + (B * logR) + (C * logR * logR * logR));
+//
+//    		    			  NTC_Data[i] = 1.0 / ((logR / T2_Bvalue) + (1.0 / T0)) - 275.15;
+//
+//    		    			  NTC_Data[i] = Kelvin - 273.15;
 
-    		    			  float Res = (Divider_Resistor * voltage ) / (Volt_Ref - voltage);
 
-    		    			  float logR = log(Res / Divider_Resistor);
 
-    		    			  NTC_Data[i] = 1.0 / ((logR / T2_Bvalue) + (1.0 / T0)) - 275.15;
+    		    			  float resistance = Divider_Resistor * (4095.0 / NTC_ADC_Buffer[i] - 1);
+
+    		    			  NTC_Data[i] = 1.0 / ((log(resistance / Divider_Resistor)) / T1_Bvalue + 1.0 / T0) - 273.15;
 
     		    			  /*************************NTC CALCULATION*********************************/
     	}
@@ -117,14 +130,17 @@ int* NTC_Array(int Tot_Sensor)
 
     		    			  /*************************NTC CALCULATION*********************************/
 
-    		    			  float voltage = (NTC_ADC_Buffer[i] * Volt_Ref) / ADC_Res;
+//    		    			  float voltage = (NTC_ADC_Buffer[i] * Volt_Ref) / ADC_Res;
+//
+//    		    			  float Res = (Divider_Resistor * voltage ) / (Volt_Ref - voltage);
+//
+//    		    			  float logR = log(Res / Divider_Resistor);
+//
+//    		    			  NTC_Data[i] = 1.0 / ((logR / T2_Bvalue) + (1.0 / T0)) - 275.15;
 
-    		    			  float Res = (Divider_Resistor * voltage ) / (Volt_Ref - voltage);
+    		    			  float resistance = Divider_Resistor * (4095.0 / NTC_ADC_Buffer[i] - 1);
 
-    		    			  float logR = log(Res / Divider_Resistor);
-
-    		    			  NTC_Data[i] = 1.0 / ((logR / T2_Bvalue) + (1.0 / T0)) - 275.15;
-
+    		    			  NTC_Data[i] = 1.0 / ((log(resistance / Divider_Resistor)) / T1_Bvalue + 1.0 / T0) - 273.15;
     		    			  /*************************NTC CALCULATION*********************************/
 
     	}
@@ -145,13 +161,17 @@ int* NTC_Array(int Tot_Sensor)
 
     		    			  /*************************NTC CALCULATION*********************************/
 
-    		    			  float voltage = (NTC_ADC_Buffer[i] * Volt_Ref) / ADC_Res;
+//    		    			  float voltage = (NTC_ADC_Buffer[i] * Volt_Ref) / ADC_Res;
+//
+//    		    			  float Res = (Divider_Resistor * voltage ) / (Volt_Ref - voltage);
+//
+//    		    			  float logR = log(Res / Divider_Resistor);
+//
+//    		    			  NTC_Data[i] = 1.0 / ((logR / T2_Bvalue) + (1.0 / T0)) - 275.15;
 
-    		    			  float Res = (Divider_Resistor * voltage ) / (Volt_Ref - voltage);
+    		    			  float resistance = Divider_Resistor * (4095.0 / NTC_ADC_Buffer[i] - 1);
 
-    		    			  float logR = log(Res / Divider_Resistor);
-
-    		    			  NTC_Data[i] = 1.0 / ((logR / T2_Bvalue) + (1.0 / T0)) - 275.15;
+    		    			  NTC_Data[i] = 1.0 / ((log(resistance / Divider_Resistor)) / T1_Bvalue + 1.0 / T0) - 273.15;
 
     		    			  /*************************NTC CALCULATION*********************************/
 

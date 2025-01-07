@@ -351,7 +351,7 @@ void DATA_LOG()
 	  		Update_Log_Num();
 	  		Log_File_Num = 1;
 	    }
-	  	UART_Printf("Data saved in log file = %s%d file size = %d Bytes \n",File_Name,Current_Log_File_No,File_Size);
+	  	UART_Printf("Data saved in log file = %s%d file size = %d Bytes\n",File_Name,Current_Log_File_No,File_Size);
 }
 
 void Update_Log_Num()
