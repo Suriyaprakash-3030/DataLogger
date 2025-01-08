@@ -10,7 +10,9 @@
 #include "Define.h"
 #include "ADC.h"
 #include "Ultrasonic.h"
-
+#define SAMPLE_COUNT 1000 // Number of samples to take
+#define VREF 3.3          // Reference voltage
+#define ADC_RESOLUTION 4096.0 // ADC resolution (12-bit)
 
 float U_adcBuffer = 0;
 float Ultrasonic_Amplitude(float U_amp)
@@ -24,17 +26,37 @@ float Ultrasonic_Amplitude(float U_amp)
 		    			  {
 		    			      Error_Handler();
 		    			  }
-		    			  HAL_ADC_Start(&hadc1);
-		    			  HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
-		    			  U_adcBuffer = HAL_ADC_GetValue(&hadc1);
-		    			  HAL_ADC_Stop(&hadc1);
 
-		    			  float khz = 20*log(U_adcBuffer/2234.2);
-		    			  if (!isfinite(khz) || isnan(khz))
-		    			  {
-		    			         return 0.0; // Return 0 if value is -inf, inf, or nan
-		    			  }
-		    			  return khz;
+		    			 HAL_ADC_Start(&hadc1);
+		    			 HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
+		    			 U_adcBuffer = HAL_ADC_GetValue(&hadc1);
+		    			 HAL_ADC_Stop(&hadc1);
+
+		    			 float khz = ((float)U_adcBuffer / ADC_RESOLUTION) * VREF;
+		    			 return khz;
+
+
+
+
+
+
+
+
+
+
+//
+//
+//		    			  HAL_ADC_Start(&hadc1);
+//		    			  HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
+//		    			  U_adcBuffer = HAL_ADC_GetValue(&hadc1);
+//		    			  HAL_ADC_Stop(&hadc1);
+//
+//		    			  float khz = 20*log(U_adcBuffer/2234.2);
+//		    			  if (!isfinite(khz) || isnan(khz))
+//		    			  {
+//		    			         return 0.0; // Return 0 if value is -inf, inf, or nan
+//		    			  }
+//		    			  return khz;
 
 
 }
